@@ -44,3 +44,11 @@ map("n", "<leader>sr", builtin.oldfiles, { desc = "Recent Files" })
 map("n", "<leader>sw", builtin.grep_string, { desc = "Find Word" })
 map("n", "<leader>sk", builtin.keymaps, { desc = "Find Keymaps" })
 map("n", "<leader>sc", builtin.commands, { desc = "Find Commands" })
+
+-- Paste over selection without yanking the selected text and losing the buffer
+map("x", "<leader>p", [["_dP]], { desc = "Paste without losing register" })
+
+-- Replace the current word in the whole file
+map("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {
+  desc = "Replace word under cursor in file",
+})
