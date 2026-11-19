@@ -49,6 +49,22 @@ map("n", "<leader>sc", builtin.commands, { desc = "Find Commands" })
 map("x", "<leader>p", [["_dP]], { desc = "Paste without losing register" })
 
 -- Replace the current word in the whole file
-map("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {
+map("n", "<leader>w", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {
   desc = "Replace word under cursor in file",
 })
+
+-- Compile and run any language code
+vim.keymap.set("n", "<leader>r", function()
+    local file_name = vim.fn.expand("%:t")
+    local file_type = vim.bo.filetype
+
+    if file_type == "cpp" then
+        vim.cmd("botright split | terminal g++ " .. file_name .. "; ./a.out")
+
+    -- Add any language you want to compile file of 
+    -- elseif file_type == [file_filetype] then
+    --     vim.cmd("botright split | terminal [compiler] " .. file_name ..["executable file if exists"])
+
+    end
+
+end, { desc = "Compile and Run any language" })
